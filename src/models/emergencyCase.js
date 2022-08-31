@@ -27,4 +27,10 @@ const EmergencyCase = new mongoose.Schema({
   emergencyStatus: {
     type: String,
   },
+  gender: {
+    type: String,
+  },
+  ageRange: {
+    type: String,
+  },
 });
