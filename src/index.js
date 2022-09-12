@@ -2,7 +2,9 @@ import express from "express";
 import multer from "multer";
 import cors from "cors";
 import config from "../src/config/index.js";
-import connectMongo from "../src/loaders/mongoDB.js";
+import connectMongo from "./loaders/mongoDB.js";
+import router from "./routes/user.routes.js";
+
 async function startServer() {
   const forms = multer();
   const app = express();
@@ -29,6 +31,8 @@ async function startServer() {
   });
 
   //   app.use("/v1", apiv1Routes);
+
+  app.use(router);
 
   app.use("/", (req, res, next) => {
     res.status(404).send("Not Found");

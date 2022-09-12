@@ -1,5 +1,6 @@
 import express from "express";
 import multer from "multer";
+import postAddress from "../controllers/userController.js";
 // import authMiddleware from "../../middlewares/Auth.middleware";
 // import userService from "../../services/user.service";
 
@@ -19,5 +20,7 @@ import multer from "multer";
 const router = express.Router();
 
 // router.get("/user-detail", authMiddleware, userService.getDetail);
+
+router.post("/address", postAddress);
 
 export default router;

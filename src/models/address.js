@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { required } from "nodemon/lib/config";
 
 const Address = new mongoose.Schema({
   houseNumber: {
@@ -8,11 +7,10 @@ const Address = new mongoose.Schema({
   street: {
     type: String,
   },
-  sunDistrict: [
-    {
-      type: String,
-    },
-  ],
+  subDistrict: {
+    type: String,
+  },
+
   district: {
     type: String,
   },
@@ -35,3 +33,5 @@ const Address = new mongoose.Schema({
     type: String,
   },
 });
+
+export default mongoose.model("AddressModel", Address);
