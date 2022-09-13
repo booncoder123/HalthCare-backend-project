@@ -1,7 +1,6 @@
 import AddressModel from "../models/address.js";
 
 import mongoose from "mongoose";
-import address from "../models/address.js";
 
 const isMongooseId = mongoose.Types.ObjectId.isValid;
 

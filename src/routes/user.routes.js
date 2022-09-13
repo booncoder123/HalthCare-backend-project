@@ -6,6 +6,7 @@ import {
   getAddressByAddressId,
   putAddressByAddressId,
   deleteAddressByAddressId,
+  postEmergencyCase,
 } from "../controllers/userController.js";
 
 // import authMiddleware from "../../middlewares/Auth.middleware";
@@ -29,6 +30,7 @@ const router = express.Router();
 // router.get("/user-detail", authMiddleware, userService.getDetail);
 
 router.post("/address", postAddress);
+router.post("/emergencycase", postEmergencyCase);
 
 router.get("/addresses", getAllAddress);
 router.get("/address", getAddressByAddressId);
