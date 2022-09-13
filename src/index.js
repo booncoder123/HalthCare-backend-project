@@ -7,6 +7,7 @@ import addressRouter from "./routes/address.routes.js";
 import emergencyCaseRouter from "./routes/emergencyCase.routes.js";
 import emergencyContactRouter from "./routes/emergencyContact.routes.js";
 import hospitalRouter from "./routes/hospital.routes.js";
+import insuranceRouter from "./routes/insurance.routes.js";
 
 async function startServer() {
   const forms = multer();
@@ -39,6 +40,7 @@ async function startServer() {
   app.use(emergencyCaseRouter);
   app.use(emergencyContactRouter);
   app.use(hospitalRouter);
+  app.use(insuranceRouter);
 
   app.use("/", (req, res, next) => {
     res.status(404).send("Not Found");

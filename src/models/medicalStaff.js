@@ -19,4 +19,4 @@ const MedicalStaff = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("medicalStaff", MedicalStaff);
+export default mongoose.model("medical staff", MedicalStaff);

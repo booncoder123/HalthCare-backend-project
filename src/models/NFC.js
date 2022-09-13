@@ -7,4 +7,4 @@ const NFC = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("NFC", NFC);
+export default mongoose.model("NFC", NFC);

@@ -5,25 +5,26 @@ import mongoose from "mongoose";
 const isMongooseId = mongoose.Types.ObjectId.isValid;
 
 export async function createInsurance(payload) {
-  const { userId, insuranceNumber, insuranceType, InsuranceCompany } = payload;
+  const { userId, number, type, company } = payload;
 
-  return await HospitalModel.create({
-    addressId,
-    hospitalName,
-    hospitalType,
+  return await InsuranceModel.create({
+    userId,
+    number,
+    type,
+    company,
   });
 }
 
-export async function returnAllHospital() {
-  return await HospitalModel.find({
+export async function returnAllInsurance() {
+  return await InsuranceModel.find({
     isDeleted: false,
   });
 }
 
-export async function returnHospitalById(hospitalId) {
-  if (isMongooseId(hospitalId)) {
-    return await HospitalModel.findOne({
-      _id: hospitalId,
+export async function returnInsuranceById(id) {
+  if (isMongooseId(id)) {
+    return await InsuranceModel.findOne({
+      _id: id,
       isDeleted: false,
     });
   } else {
@@ -34,10 +35,10 @@ export async function returnHospitalById(hospitalId) {
   }
 }
 
-export async function returnHospitalByAddressId(addressId) {
-  if (isMongooseId(addressId)) {
-    return await HospitalModel.findOne({
-      addressId: addressId,
+export async function returnInsuranceByUserId(userId) {
+  if (isMongooseId(userId)) {
+    return await InsuranceModel.findOne({
+      userId: userId,
       isDeleted: false,
     });
   } else {
@@ -48,18 +49,19 @@ export async function returnHospitalByAddressId(addressId) {
   }
 }
 
-export async function updateHospitalById(payload, hospitalId) {
-  const { addressId, hospitalName, hospitalType } = payload;
-  if (isMongooseId(hospitalId)) {
-    return await HospitalModel.findOneAndUpdate(
+export async function updateInsuranceById(payload, id) {
+  const { userId, number, type, company } = payload;
+  if (isMongooseId(id)) {
+    return await InsuranceModel.findOneAndUpdate(
       {
-        _id: hospitalId,
+        _id: id,
         isDeleted: false,
       },
       {
-        addressId,
-        hospitalName,
-        hospitalType,
+        userId,
+        number,
+        type,
+        company,
       },
       {
         new: true,
@@ -74,11 +76,11 @@ export async function updateHospitalById(payload, hospitalId) {
   }
 }
 
-export async function softDeleteHospitalById(hospitalId) {
-  if (isMongooseId(hospitalId)) {
-    return await HospitalModel.findOneAndUpdate(
+export async function softDeleteInsuranceById(id) {
+  if (isMongooseId(id)) {
+    return await InsuranceModel.findOneAndUpdate(
       {
-        _id: hospitalId,
+        _id: id,
         isDeleted: false,
       },
       {
