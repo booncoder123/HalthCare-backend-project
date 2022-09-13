@@ -23,10 +23,10 @@ export async function createEmergencyContact(payload) {
   }
 }
 
-export async function returnEmergencyContactById(emergencyContactId) {
-  if (isMongooseId(emergencyContactId)) {
+export async function returnEmergencyContactById(id) {
+  if (isMongooseId(id)) {
     return await EmergencyContactModel.findOne({
-      _id: emergencyContactId,
+      _id: id,
       isDeleted: false,
     });
   } else {
@@ -57,13 +57,13 @@ export async function returnAllEmergencyContact() {
   });
 }
 
-export async function updateEmergencyContactById(payload, emergencyContactId) {
+export async function updateEmergencyContactById(payload, id) {
   const { userId, firstName, lastName, email, phoneNumber } = payload;
 
-  if (isMongooseId(emergencyContactId)) {
+  if (isMongooseId(id)) {
     return await EmergencyContactModel.findOneAndUpdate(
       {
-        _id: emergencyContactId,
+        _id: id,
         isDeleted: false,
       },
       {
@@ -83,11 +83,11 @@ export async function updateEmergencyContactById(payload, emergencyContactId) {
   }
 }
 
-export async function softDeleteEmergencyContactById(emergencyContactId) {
-  if (isMongooseId(emergencyContactId)) {
+export async function softDeleteEmergencyContactById(id) {
+  if (isMongooseId(id)) {
     return await EmergencyContactModel.findOneAndUpdate(
       {
-        _id: emergencyContactId,
+        _id: id,
         isDeleted: false,
       },
       {

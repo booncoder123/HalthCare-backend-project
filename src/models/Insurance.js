@@ -5,15 +5,15 @@ const Insurance = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: true,
   },
-  insuranceNumber: {
+  number: {
     type: String,
   },
-  insuranceType: {
+  type: {
     type: String,
   },
-  insuranceCompany: {
+  company: {
     type: String,
   },
 });
 
-module.exports = mongoose.model("insurance", Insurance);
+export default mongoose.model("insurance", Insurance);

@@ -3,7 +3,10 @@ import multer from "multer";
 import cors from "cors";
 import config from "../src/config/index.js";
 import connectMongo from "./loaders/mongoDB.js";
-import router from "./routes/user.routes.js";
+import addressRouter from "./routes/address.routes.js";
+import emergencyCaseRouter from "./routes/emergencyCase.routes.js";
+import emergencyContactRouter from "./routes/emergencyContact.routes.js";
+import hospitalRouter from "./routes/hospital.routes.js";
 
 async function startServer() {
   const forms = multer();
@@ -32,7 +35,10 @@ async function startServer() {
 
   //   app.use("/v1", apiv1Routes);
 
-  app.use(router);
+  app.use(addressRouter);
+  app.use(emergencyCaseRouter);
+  app.use(emergencyContactRouter);
+  app.use(hospitalRouter);
 
   app.use("/", (req, res, next) => {
     res.status(404).send("Not Found");

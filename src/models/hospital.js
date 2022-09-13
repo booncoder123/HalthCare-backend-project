@@ -6,11 +6,11 @@ const Hospital = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       required: true,
     },
-    hospitalName: {
+    name: {
       type: String,
       required: "true",
     },
-    hospitalType: {
+    type: {
       type: String,
       required: "true",
     },

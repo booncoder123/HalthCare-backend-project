@@ -37,10 +37,10 @@ export async function createEmergencyCase(payload) {
   }
 }
 
-export async function returnEmergencyCaseById(emergencyCaseId) {
-  if (isMongooseId(emergencyCaseId)) {
+export async function returnEmergencyCaseById(id) {
+  if (isMongooseId(id)) {
     return await EmergencyCaseModel.findOne({
-      _id: emergencyCaseId,
+      _id: id,
       isDeleted: false,
     });
   } else {
@@ -71,7 +71,7 @@ export async function returnAllEmergencyCase() {
   });
 }
 
-export async function updateEmergencyCaseById(payload, emergencyCaseId) {
+export async function updateEmergencyCaseById(payload, id) {
   const {
     userId,
     alertness,
@@ -84,10 +84,10 @@ export async function updateEmergencyCaseById(payload, emergencyCaseId) {
     ageRange,
   } = payload;
 
-  if (isMongooseId(emergencyCaseId)) {
+  if (isMongooseId(id)) {
     return await EmergencyCaseModel.findOneAndUpdate(
       {
-        _id: emergencyCaseId,
+        _id: id,
         isDeleted: false,
       },
       {
@@ -111,11 +111,11 @@ export async function updateEmergencyCaseById(payload, emergencyCaseId) {
   }
 }
 
-export async function softDeleteEmergencyCaseById(emergencyCaseId) {
-  if (isMongooseId(emergencyCaseId)) {
+export async function softDeleteEmergencyCaseById(id) {
+  if (isMongooseId(id)) {
     return await EmergencyCaseModel.findOneAndUpdate(
       {
-        _id: emergencyCaseId,
+        _id: id,
         isDeleted: false,
       },
       {

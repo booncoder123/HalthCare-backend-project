@@ -38,10 +38,10 @@ export async function returnAllAddress() {
   });
 }
 
-export async function returnAddressByAddressId(addressId) {
-  if (isMongooseId(addressId)) {
+export async function returnAddressById(id) {
+  if (isMongooseId(id)) {
     return await AddressModel.findOne({
-      _id: addressId,
+      _id: id,
       isDeleted: false,
     });
   } else {
@@ -52,7 +52,7 @@ export async function returnAddressByAddressId(addressId) {
   }
 }
 
-export async function updateAddressByAddressId(payload, addressId) {
+export async function updateAddressById(payload, id) {
   const {
     houseNumber,
     street,
@@ -65,10 +65,10 @@ export async function updateAddressByAddressId(payload, addressId) {
     longitude,
     type,
   } = payload;
-  if (isMongooseId(addressId)) {
+  if (isMongooseId(id)) {
     return await AddressModel.findOneAndUpdate(
       {
-        _id: addressId,
+        _id: id,
         isDeleted: false,
       },
       {
@@ -93,11 +93,11 @@ export async function updateAddressByAddressId(payload, addressId) {
   }
 }
 
-export async function softDeleteAddressByAddressId(addressId) {
-  if (isMongooseId(addressId)) {
+export async function softDeleteAddressById(id) {
+  if (isMongooseId(id)) {
     return await AddressModel.findOneAndUpdate(
       {
-        _id: addressId,
+        _id: id,
         isDeleted: false,
       },
       {
