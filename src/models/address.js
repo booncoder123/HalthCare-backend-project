@@ -33,6 +33,10 @@ const Address = new mongoose.Schema(
     type: {
       type: String,
     },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     strict: false,

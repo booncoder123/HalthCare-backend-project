@@ -3,6 +3,7 @@ import {
   returnAllAddress,
   returnAddressByAddressId,
   updateAddressByAddressId,
+  softDeleteAddressByAddressId,
 } from "../functions/address.js";
 
 export async function postAddress(req, res) {
@@ -46,6 +47,19 @@ export async function putAddressByAddressId(req, res) {
   try {
     const addressId = req.body.addressId;
     const address = await updateAddressByAddressId(req.body, addressId);
+    res.send(address);
+  } catch (error) {
+    console.log("error: ", error);
+    res
+      .status(error.status || 500)
+      .send(error.message || "Internal Server Error");
+  }
+}
+
+export async function deleteAddressByAddressId(req, res) {
+  try {
+    const addressId = req.body.addressId;
+    const address = await softDeleteAddressByAddressId(addressId);
     res.send(address);
   } catch (error) {
     console.log("error: ", error);

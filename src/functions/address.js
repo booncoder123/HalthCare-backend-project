@@ -34,13 +34,16 @@ export async function createAddress(payload) {
 }
 
 export async function returnAllAddress() {
-  return await AddressModel.find();
+  return await AddressModel.find({
+    isDeleted: false,
+  });
 }
 
 export async function returnAddressByAddressId(addressId) {
   if (isMongooseId(addressId)) {
     return await AddressModel.findOne({
       _id: addressId,
+      isDeleted: false,
     });
   } else {
     throw {
@@ -67,6 +70,7 @@ export async function updateAddressByAddressId(payload, addressId) {
     return await AddressModel.findOneAndUpdate(
       {
         _id: addressId,
+        isDeleted: false,
       },
       {
         houseNumber,
@@ -79,6 +83,26 @@ export async function updateAddressByAddressId(payload, addressId) {
         latitude,
         longitude,
         type,
+      },
+      { new: true, omitUndefined: true }
+    );
+  } else {
+    throw {
+      message: "id is not valid",
+      status: 404,
+    };
+  }
+}
+
+export async function softDeleteAddressByAddressId(addressId) {
+  if (isMongooseId(addressId)) {
+    return await AddressModel.findOneAndUpdate(
+      {
+        _id: addressId,
+        isDeleted: false,
+      },
+      {
+        isDeleted: true,
       },
       { new: true, omitUndefined: true }
     );

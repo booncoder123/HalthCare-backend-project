@@ -5,7 +5,9 @@ import {
   getAllAddress,
   getAddressByAddressId,
   putAddressByAddressId,
+  deleteAddressByAddressId,
 } from "../controllers/userController.js";
+
 // import authMiddleware from "../../middlewares/Auth.middleware";
 // import userService from "../../services/user.service";
 
@@ -32,5 +34,7 @@ router.get("/addresses", getAllAddress);
 router.get("/address", getAddressByAddressId);
 
 router.put("/address", putAddressByAddressId);
+
+router.delete("/address", deleteAddressByAddressId);
 
 export default router;
