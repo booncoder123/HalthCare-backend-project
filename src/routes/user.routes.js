@@ -7,6 +7,11 @@ import {
   putAddressByAddressId,
   deleteAddressByAddressId,
   postEmergencyCase,
+  getAllEmergencyCase,
+  getEmergencyCaseByUserId,
+  getEmergencyCaseById,
+  putEmergencyCaseById,
+  deleteEmergencyCaseById,
 } from "../controllers/userController.js";
 
 // import authMiddleware from "../../middlewares/Auth.middleware";
@@ -34,9 +39,14 @@ router.post("/emergencycase", postEmergencyCase);
 
 router.get("/addresses", getAllAddress);
 router.get("/address", getAddressByAddressId);
+router.get("/emergencycases", getAllEmergencyCase);
+router.get("/emergencycase/userid", getEmergencyCaseByUserId);
+router.get("/emergencycase/id", getEmergencyCaseById);
 
 router.put("/address", putAddressByAddressId);
+router.put("/emergencycase", putEmergencyCaseById);
 
 router.delete("/address", deleteAddressByAddressId);
+router.delete("/emergencycase", deleteEmergencyCaseById);
 
 export default router;
