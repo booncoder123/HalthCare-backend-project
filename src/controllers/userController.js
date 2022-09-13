@@ -22,6 +22,14 @@ import {
   softDeleteEmergencyContactById,
   updateEmergencyContactById,
 } from "../functions/emergencyContact.js";
+import {
+  createHospital,
+  returnAllHospital,
+  returnHospitalByAddressId,
+  returnHospitalById,
+  softDeleteHospitalById,
+  updateHospitalById,
+} from "../functions/hospital.js";
 
 export async function postAddress(req, res) {
   try {
@@ -218,6 +226,68 @@ export async function deleteEmergencyContactById(req, res) {
       emergencyContactId
     );
     res.send(emergencyContact);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function postHospital(req, res) {
+  try {
+    const hospital = await createHospital(req.body);
+    res.send(hospital);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function getHospitalById(req, res) {
+  try {
+    const hospital = await returnHospitalById(req.body.hospitalId);
+    res.send(hospital);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function getHospitalByAddressId(req, res) {
+  try {
+    const hospital = await returnHospitalByAddressId(req.body.addressId);
+    res.send(hospital);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function getAllHospital(req, res) {
+  try {
+    const hospitals = await returnAllHospital();
+    res.send(hospitals);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function putHospitaltById(req, res) {
+  try {
+    const hospitalId = req.body.hospitalId;
+    const hospital = await updateHospitalById(req.body, hospitalId);
+    res.send(hospital);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function deleteHospitalById(req, res) {
+  try {
+    const hospitalId = req.body.hospitalId;
+    const hospital = await softDeleteHospitalById(hospitalId);
+    res.send(hospital);
   } catch (error) {
     console.log("error: ", error);
     res.status(error.status || 500);

@@ -45,4 +45,4 @@ const EmergencyCase = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("emergencyCase", EmergencyCase);
+export default mongoose.model("emergency case", EmergencyCase);

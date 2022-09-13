@@ -45,4 +45,4 @@ const Address = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("AddressModel", Address);
+export default mongoose.model("address", Address);

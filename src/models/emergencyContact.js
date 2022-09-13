@@ -33,4 +33,4 @@ const EmergencyContact = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("emergencyContect", EmergencyContact);
+export default mongoose.model("emergency contact", EmergencyContact);
