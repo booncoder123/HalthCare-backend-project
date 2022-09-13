@@ -14,6 +14,14 @@ import {
   softDeleteEmergencyCaseById,
   updateEmergencyCaseById,
 } from "../functions/emergencyCase.js";
+import {
+  createEmergencyContact,
+  returnAllEmergencyContact,
+  returnEmergencyContactById,
+  returnEmergencyContactByUserId,
+  softDeleteEmergencyContactById,
+  updateEmergencyContactById,
+} from "../functions/emergencyContact.js";
 
 export async function postAddress(req, res) {
   try {
@@ -112,8 +120,8 @@ export async function getEmergencyCaseByUserId(req, res) {
 
 export async function getAllEmergencyCase(req, res) {
   try {
-    const emergencyCase = await returnAllEmergencyCase();
-    res.send(emergencyCase);
+    const emergencyCases = await returnAllEmergencyCase();
+    res.send(emergencyCases);
   } catch (error) {
     console.log("error: ", error);
     res.status(error.status || 500);
@@ -139,6 +147,77 @@ export async function deleteEmergencyCaseById(req, res) {
     const emergencyCaseId = req.body.emergencyCaseId;
     const emergencyCase = await softDeleteEmergencyCaseById(emergencyCaseId);
     res.send(emergencyCase);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function postEmergencyContact(req, res) {
+  try {
+    const emergencyContact = await createEmergencyContact(req.body);
+    res.send(emergencyContact);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function getEmergencyContactById(req, res) {
+  try {
+    const emergencyContact = await returnEmergencyContactById(
+      req.body.emergencyContactId
+    );
+    res.send(emergencyContact);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function getEmergencyContactByUserId(req, res) {
+  try {
+    const emergencyContact = await returnEmergencyContactByUserId(
+      req.body.userId
+    );
+    res.send(emergencyContact);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function getAllEmergencyContact(req, res) {
+  try {
+    const emergencyContacts = await returnAllEmergencyContact();
+    res.send(emergencyContacts);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function putEmergencyContactById(req, res) {
+  try {
+    const emergencyContactId = req.body.emergencyContactId;
+    const emergencyContact = await updateEmergencyContactById(
+      req.body,
+      emergencyContactId
+    );
+    res.send(emergencyContact);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(error.status || 500);
+  }
+}
+
+export async function deleteEmergencyContactById(req, res) {
+  try {
+    const emergencyContactId = req.body.emergencyContactId;
+    const emergencyContact = await softDeleteEmergencyContactById(
+      emergencyContactId
+    );
+    res.send(emergencyContact);
   } catch (error) {
     console.log("error: ", error);
     res.status(error.status || 500);
