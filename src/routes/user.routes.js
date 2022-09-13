@@ -1,6 +1,11 @@
 import express from "express";
 import multer from "multer";
-import postAddress from "../controllers/userController.js";
+import {
+  postAddress,
+  getAllAddress,
+  getAddressByAddressId,
+  putAddressByAddressId,
+} from "../controllers/userController.js";
 // import authMiddleware from "../../middlewares/Auth.middleware";
 // import userService from "../../services/user.service";
 
@@ -22,5 +27,10 @@ const router = express.Router();
 // router.get("/user-detail", authMiddleware, userService.getDetail);
 
 router.post("/address", postAddress);
+
+router.get("/addresses", getAllAddress);
+router.get("/address", getAddressByAddressId);
+
+router.put("/address", putAddressByAddressId);
 
 export default router;
