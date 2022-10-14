@@ -4,11 +4,9 @@ const EmergencyCase = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Types.ObjectId,
-      required: true,
     },
     alertness: {
       type: String,
-      required: "true",
     },
     alertnessLevel: {
       type: String,

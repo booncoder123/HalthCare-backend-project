@@ -3,11 +3,9 @@ import mongoose from "mongoose";
 const User = new mongoose.Schema({
   addressId: {
     type: mongoose.Types.ObjectId,
-    required: true,
   },
   contactId: {
     type: mongoose.Types.ObjectId,
-    required: true,
   },
   NFCId: {
     type: mongoose.Types.ObjectId,
@@ -17,25 +15,23 @@ const User = new mongoose.Schema({
   },
   role: {
     type: String,
-    required: true,
     lowercase: true,
   },
   email: {
     type: String,
     lowercase: true,
-    required: true,
     unique: true,
+  },
+  password: {
+    type: String,
   },
   faceImg: {
     type: String,
-    required: true,
   },
   nationalIdImg: {
     type: String,
-    required: true,
   },
   verificationStatus: {
     type: String,
-    required: true,
   },
 });

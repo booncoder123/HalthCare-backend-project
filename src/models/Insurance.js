@@ -4,7 +4,6 @@ const Insurance = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Types.ObjectId,
-      required: true,
     },
     number: {
       type: String,

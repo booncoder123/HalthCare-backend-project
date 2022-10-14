@@ -4,11 +4,9 @@ const NFC = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Types.ObjectId,
-      required: true,
     },
     isDeleted: {
       type: Boolean,
-      default: false,
     },
   },
   {

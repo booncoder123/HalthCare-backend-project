@@ -9,7 +9,6 @@ const MedicalInformation = new mongoose.Schema(
     ],
     phoneNumber: {
       type: String,
-      required: "true",
     },
     congenitalDisease: {
       type: String,
@@ -22,11 +21,9 @@ const MedicalInformation = new mongoose.Schema(
     },
     firstName: {
       type: String,
-      required: true,
     },
     lastName: {
       type: String,
-      required: true,
     },
     NFCStatus: {
       type: String,

@@ -4,22 +4,18 @@ const EmergencyContact = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Types.ObjectId,
-      required: true,
     },
     firstName: {
       type: String,
-      required: "true",
     },
     lastName: {
       type: String,
-      required: "true",
     },
     email: {
       type: String,
     },
     phoneNumber: {
       type: String,
-      required: "true",
     },
     isDeleted: {
       type: Boolean,

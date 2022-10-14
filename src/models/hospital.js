@@ -4,15 +4,12 @@ const Hospital = new mongoose.Schema(
   {
     addressId: {
       type: mongoose.Types.ObjectId,
-      required: true,
     },
     name: {
       type: String,
-      required: "true",
     },
     type: {
       type: String,
-      required: "true",
     },
     isDeleted: {
       type: Boolean,
