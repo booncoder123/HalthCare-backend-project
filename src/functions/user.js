@@ -91,3 +91,43 @@ export async function createUser(payload) {
 
   return await { user, medicalInformation };
 }
+
+export async function returnAllUser() {
+  return await UserModel.find({
+    isDeleted: false,
+  });
+}
+
+export async function returnUserById(id) {
+  if (isMongooseId(id)) {
+    return await UserModel.findOne({
+      _id: id,
+      isDeleted: false,
+    });
+  } else {
+    throw {
+      message: "invalid id",
+      status: 404,
+    };
+  }
+}
+
+export async function softDeleteUserById(id) {
+  if (isMongooseId(id)) {
+    return await UserModel.findOneAndUpdate(
+      {
+        _id: id,
+        isDeleted: false,
+      },
+      {
+        isDeleted: true,
+      },
+      { new: true, omitUndefined: true }
+    );
+  } else {
+    throw {
+      message: "id is not valid",
+      status: 404,
+    };
+  }
+}

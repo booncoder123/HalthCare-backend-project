@@ -1,7 +1,12 @@
 import express from "express";
 import multer from "multer";
 
-import { postUser } from "../controllers/user.controller.js";
+import {
+  deleteUserById,
+  getAllUser,
+  getUserById,
+  postUser,
+} from "../controllers/user.controller.js";
 
 // import authMiddleware from "../../middlewares/Auth.middleware";
 // import userService from "../../services/user.service";
@@ -22,6 +27,11 @@ import { postUser } from "../controllers/user.controller.js";
 const router = express.Router();
 
 router.post("/user", postUser);
+
+router.get("/users", getAllUser);
+router.get("/user/:id", getUserById);
+
+router.delete("/user/:id", deleteUserById);
 
 // router.get("/user-detail", authMiddleware, userService.getDetail);
 
