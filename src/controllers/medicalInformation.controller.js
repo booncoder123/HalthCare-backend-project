@@ -6,56 +6,56 @@ import {
   updateMedicalInformationById,
 } from "../functions/medicalInformation.js";
 
-export async function postMedicalInformation(req, res) {
+export async function postMedicalInformation(req, res, next) {
   try {
     const medicalInformation = await createMedicalInformation(req.body);
-    res.send(medicalInformation);
+    res.send({ isOk: true, data: medicalInformation });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getMedicalInformationById(req, res) {
+export async function getMedicalInformationById(req, res, next) {
   try {
     const medicalInformation = await returnMedicalInformationById(
       req.params["id"]
     );
-    res.send(medicalInformation);
+    res.send({ isOk: true, data: medicalInformation });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getAllMedicalInformation(req, res) {
+export async function getAllMedicalInformation(req, res, next) {
   try {
     const medicalInformation = await returnAllMedicalInformation();
-    res.send(medicalInformation);
+    res.send({ isOk: true, data: medicalInformation });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function putMedicalInformationById(req, res) {
+export async function putMedicalInformationById(req, res, next) {
   try {
     const id = req.params["id"];
     const medicalInformation = await updateMedicalInformationById(req.body, id);
-    res.send(medicalInformation);
+    res.send({ isOk: true, data: medicalInformation });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function deleteMedicalInformationById(req, res) {
+export async function deleteMedicalInformationById(req, res, next) {
   try {
     const id = req.params["id"];
     const medicalInformation = await softDeleteMedicalInformationById(id);
-    res.send(medicalInformation);
+    res.send({ isOk: true, data: medicalInformation });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }

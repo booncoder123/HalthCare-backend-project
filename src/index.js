@@ -11,6 +11,8 @@ import insuranceRouter from "./routes/insurance.routes.js";
 import medicalInformationRouter from "./routes/medicalInformation.routes.js";
 import medicalStaffRouter from "./routes/medicalStaff.routes.js";
 import nfcRouter from "./routes/NFC.routes.js";
+import userRouter from "./routes/user.routes.js";
+import ErrorHandler from "./middlewares/ErrorHandler.js";
 
 async function startServer() {
   const forms = multer();
@@ -47,7 +49,8 @@ async function startServer() {
   app.use(medicalInformationRouter);
   app.use(medicalStaffRouter);
   app.use(nfcRouter);
-
+  app.use(userRouter);
+  app.use(ErrorHandler);
   app.use("/", (req, res, next) => {
     res.status(404).send("Not Found");
   });

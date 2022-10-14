@@ -7,64 +7,64 @@ import {
   updateHospitalById,
 } from "../functions/hospital.js";
 
-export async function postHospital(req, res) {
+export async function postHospital(req, res, next) {
   try {
     const hospital = await createHospital(req.body);
-    res.send(hospital);
+    res.send({ isOk: true, data: hospital });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getHospitalById(req, res) {
+export async function getHospitalById(req, res, next) {
   try {
     const hospital = await returnHospitalById(req.params["id"]);
-    res.send(hospital);
+    res.send({ isOk: true, data: hospital });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getHospitalByAddressId(req, res) {
+export async function getHospitalByAddressId(req, res, next) {
   try {
     const hospital = await returnHospitalByAddressId(req.params["addressid"]);
-    res.send(hospital);
+    res.send({ isOk: true, data: hospital });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getAllHospital(req, res) {
+export async function getAllHospital(req, res, next) {
   try {
     const hospitals = await returnAllHospital();
-    res.send(hospitals);
+    res.send({ isOk: true, data: hospitals });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function putHospitaltById(req, res) {
+export async function putHospitaltById(req, res, next) {
   try {
     const id = req.params["id"];
     const hospital = await updateHospitalById(req.body, id);
-    res.send(hospital);
+    res.send({ isOk: true, data: hospital });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function deleteHospitalById(req, res) {
+export async function deleteHospitalById(req, res, next) {
   try {
     const id = req.params["id"];
     const hospital = await softDeleteHospitalById(id);
-    res.send(hospital);
+    res.send({ isOk: true, data: hospital });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }

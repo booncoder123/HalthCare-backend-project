@@ -7,6 +7,7 @@ const NFC = new mongoose.Schema(
     },
     isDeleted: {
       type: Boolean,
+      default: false,
     },
   },
   {

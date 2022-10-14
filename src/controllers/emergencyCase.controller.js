@@ -7,66 +7,66 @@ import {
   updateEmergencyCaseById,
 } from "../functions/emergencyCase.js";
 
-export async function postEmergencyCase(req, res) {
+export async function postEmergencyCase(req, res, next) {
   try {
     const emergencyCase = await createEmergencyCase(req.body);
-    res.send(emergencyCase);
+    res.send({ isOk: true, data: emergencyCase });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getEmergencyCaseById(req, res) {
+export async function getEmergencyCaseById(req, res, next) {
   try {
     const emergencyCase = await returnEmergencyCaseById(req.params["id"]);
-    res.send(emergencyCase);
+    res.send({ isOk: true, data: emergencyCase });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getEmergencyCaseByUserId(req, res) {
+export async function getEmergencyCaseByUserId(req, res, next) {
   try {
     const emergencyCase = await returnEmergencyCaseByUserId(
       req.params["userid"]
     );
-    res.send(emergencyCase);
+    res.send({ isOk: true, data: emergencyCase });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getAllEmergencyCase(req, res) {
+export async function getAllEmergencyCase(req, res, next) {
   try {
     const emergencyCases = await returnAllEmergencyCase();
-    res.send(emergencyCases);
+    res.send({ isOk: true, data: emergencyCases });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function putEmergencyCaseById(req, res) {
+export async function putEmergencyCaseById(req, res, next) {
   try {
     const id = req.params["id"];
     const emergencyCase = await updateEmergencyCaseById(req.body, id);
-    res.send(emergencyCase);
+    res.send({ isOk: true, data: emergencyCase });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function deleteEmergencyCaseById(req, res) {
+export async function deleteEmergencyCaseById(req, res, next) {
   try {
     const id = req.params["id"];
     const emergencyCase = await softDeleteEmergencyCaseById(id);
-    res.send(emergencyCase);
+    res.send({ isOk: true, data: emergencyCase });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }

@@ -7,64 +7,64 @@ import {
   updateInsuranceById,
 } from "../functions/insurance.js";
 
-export async function postInsurance(req, res) {
+export async function postInsurance(req, res, next) {
   try {
     const insurance = await createInsurance(req.body);
-    res.send(insurance);
+    res.send({ isOk: true, data: insurance });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getInsuranceById(req, res) {
+export async function getInsuranceById(req, res, next) {
   try {
     const insurance = await returnInsuranceById(req.params["id"]);
-    res.send(insurance);
+    res.send({ isOk: true, data: insurance });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getInsuranceByUserId(req, res) {
+export async function getInsuranceByUserId(req, res, next) {
   try {
     const insurance = await returnInsuranceByUserId(req.params["userid"]);
-    res.send(insurance);
+    res.send({ isOk: true, data: insurance });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getAllInsurance(req, res) {
+export async function getAllInsurance(req, res, next) {
   try {
     const insurances = await returnAllInsurance();
-    res.send(insurances);
+    res.send({ isOk: true, data: insurances });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function putInsuranceById(req, res) {
+export async function putInsuranceById(req, res, next) {
   try {
     const id = req.params["id"];
     const insurance = await updateInsuranceById(req.body, id);
-    res.send(insurance);
+    res.send({ isOk: true, data: insurance });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function deleteInsuranceById(req, res) {
+export async function deleteInsuranceById(req, res, next) {
   try {
     const id = req.params["id"];
     const insurance = await softDeleteInsuranceById(id);
-    res.send(insurance);
+    res.send({ isOk: true, data: insurance });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }

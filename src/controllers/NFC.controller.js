@@ -6,54 +6,54 @@ import {
   updateNFCById,
 } from "../functions/NFC.js";
 
-export async function postNFC(req, res) {
+export async function postNFC(req, res, next) {
   try {
     const NFC = await createNFC(req.body);
-    res.send(NFC);
+    res.send({ isOk: true, data: NFC });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getNFCById(req, res) {
+export async function getNFCById(req, res, next) {
   try {
     const NFC = await returnNFCById(req.params["id"]);
-    res.send(NFC);
+    res.send({ isOk: true, data: NFC });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getAllNFC(req, res) {
+export async function getAllNFC(req, res, next) {
   try {
     const NFC = await returnAllNFC();
-    res.send(NFC);
+    res.send({ isOk: true, data: NFC });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function putNFCById(req, res) {
+export async function putNFCById(req, res, next) {
   try {
     const id = req.params["id"];
     const NFC = await updateNFCById(req.body, id);
-    res.send(NFC);
+    res.send({ isOk: true, data: NFC });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function deleteNFCById(req, res) {
+export async function deleteNFCById(req, res, next) {
   try {
     const id = req.params["id"];
     const NFC = await softDeleteNFCById(id);
-    res.send(NFC);
+    res.send({ isOk: true, data: NFC });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }

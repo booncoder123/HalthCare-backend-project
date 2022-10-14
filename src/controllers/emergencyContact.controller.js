@@ -7,66 +7,66 @@ import {
   updateEmergencyContactById,
 } from "../functions/emergencyContact.js";
 
-export async function postEmergencyContact(req, res) {
+export async function postEmergencyContact(req, res, next) {
   try {
     const emergencyContact = await createEmergencyContact(req.body);
-    res.send(emergencyContact);
+    res.send({ isOk: true, data: emergencyContact });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getEmergencyContactById(req, res) {
+export async function getEmergencyContactById(req, res, next) {
   try {
     const emergencyContact = await returnEmergencyContactById(req.params["id"]);
-    res.send(emergencyContact);
+    res.send({ isOk: true, data: emergencyContact });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getEmergencyContactByUserId(req, res) {
+export async function getEmergencyContactByUserId(req, res, next) {
   try {
     const emergencyContact = await returnEmergencyContactByUserId(
       req.params["userid"]
     );
-    res.send(emergencyContact);
+    res.send({ isOk: true, data: emergencyContact });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function getAllEmergencyContact(req, res) {
+export async function getAllEmergencyContact(req, res, next) {
   try {
     const emergencyContacts = await returnAllEmergencyContact();
-    res.send(emergencyContacts);
+    res.send({ isOk: true, data: emergencyContacts });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function putEmergencyContactById(req, res) {
+export async function putEmergencyContactById(req, res, next) {
   try {
     const id = req.params["id"];
     const emergencyContact = await updateEmergencyContactById(req.body, id);
-    res.send(emergencyContact);
+    res.send({ isOk: true, data: emergencyContact });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
 
-export async function deleteEmergencyContactById(req, res) {
+export async function deleteEmergencyContactById(req, res, next) {
   try {
     const id = req.params["id"];
     const emergencyContact = await softDeleteEmergencyContactById(id);
-    res.send(emergencyContact);
+    res.send({ isOk: true, data: emergencyContact });
   } catch (error) {
     console.log("error: ", error);
-    res.status(error.status || 500);
+    next({ message: error.message, status: error.status });
   }
 }
