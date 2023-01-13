@@ -9,7 +9,6 @@ export async function createUser(payload) {
   const {
     addressId,
     contactId,
-    NFCId,
     medicalId,
     role,
     email,
@@ -29,7 +28,6 @@ export async function createUser(payload) {
     gender,
     firstName,
     lastName,
-    NFCStatus,
     organDonour,
     dateOfBirth,
     bloodType,
@@ -44,8 +42,6 @@ export async function createUser(payload) {
     errorMessage += "address id is not mongoose id";
   if (contactId && !isMongooseId(contactId))
     errorMessage += "contact id is not mongoose id";
-  if (NFCId && !isMongooseId(NFCId))
-    errorMessage += "NFC id is not mongoose id";
   if (medicalId && !isMongooseId(medicalId))
     errorMessage += "medical id is not mongoose id";
 
@@ -59,7 +55,6 @@ export async function createUser(payload) {
   const user = await UserModel.create({
     addressId,
     contactId,
-    NFCId,
     medicalId,
     role,
     email,
@@ -79,7 +74,6 @@ export async function createUser(payload) {
     gender,
     firstName,
     lastName,
-    NFCStatus,
     organDonour,
     dateOfBirth,
     bloodType,

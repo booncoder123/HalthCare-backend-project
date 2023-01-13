@@ -8,10 +8,7 @@ const User = new mongoose.Schema(
     contactId: {
       type: mongoose.Types.ObjectId,
     },
-    NFCId: {
-      type: mongoose.Types.ObjectId,
-    },
-    medicalId: {
+      medicalId: {
       type: mongoose.Types.ObjectId,
     },
     role: {
@@ -27,9 +24,6 @@ const User = new mongoose.Schema(
       type: String,
     },
     nationalIdImg: {
-      type: String,
-    },
-    verificationStatus: {
       type: String,
     },
     emailVerify: {

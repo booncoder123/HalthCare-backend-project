@@ -25,9 +25,6 @@ const MedicalInformation = new mongoose.Schema(
     lastName: {
       type: String,
     },
-    NFCStatus: {
-      type: String,
-    },
     organDonour: {
       type: String,
     },
