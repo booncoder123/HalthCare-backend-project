@@ -10,6 +10,7 @@ import hospitalRouter from "./routes/hospital.routes.js";
 import insuranceRouter from "./routes/insurance.routes.js";
 import medicalInformationRouter from "./routes/medicalInformation.routes.js";
 import medicalStaffRouter from "./routes/medicalStaff.routes.js";
+import pharmacistRouter from "./routes/pharmacist.routes.js";
 import userRouter from "./routes/user.routes.js";
 import ErrorHandler from "./middlewares/ErrorHandler.js";
 
@@ -47,6 +48,7 @@ async function startServer() {
   app.use(insuranceRouter);
   app.use(medicalInformationRouter);
   app.use(medicalStaffRouter);
+  app.use(pharmacistRouter);
   app.use(userRouter);
   app.use(ErrorHandler);
   app.use("/", (req, res, next) => {
