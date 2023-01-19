@@ -1,4 +1,6 @@
 import AddressModel from "../models/address.js";
+import UserModel from "../models/user.js";
+import HospitalModel from "../models/hospital.js";
 
 import mongoose from "mongoose";
 
@@ -6,6 +8,9 @@ const isMongooseId = mongoose.Types.ObjectId.isValid;
 
 export async function createAddress(payload) {
   const {
+    userId,
+    hospitalId,
+    pharmacyId,
     houseNumber,
     street,
     subDistrict,
@@ -18,7 +23,7 @@ export async function createAddress(payload) {
     type,
   } = payload;
 
-  return await AddressModel.create({
+  const address = await AddressModel.create({
     houseNumber,
     street,
     subDistrict,
@@ -30,6 +35,31 @@ export async function createAddress(payload) {
     longitude,
     type,
   });
+
+  if (isMongooseId(userId)) {
+    await UserModel.findOneAndUpdate(
+      {
+        _id: userId,
+      },
+      {
+        addressId: address._id,
+      },
+      { new: true, omitUndefined: true }
+    );
+  } else if (isMongooseId(hospitalId)) {
+    await HospitalModel.findOneAndUpdate(
+      {
+        _id: hospitalId,
+        isDeleted: false,
+      },
+      {
+        addressId: address._id,
+      },
+      { new: true, omitUndefined: true }
+    );
+  }
+
+  return address;
 }
 
 export async function returnAllAddress() {
@@ -50,6 +80,26 @@ export async function returnAddressById(id) {
       status: 404,
     };
   }
+}
+
+export async function returnAddressByUserId(userId) {
+  let user;
+  if (isMongooseId(userId)) {
+    user = await UserModel.findOne({
+      _id: userId,
+      isDeleted: false,
+    });
+  } else {
+    throw {
+      message: "user id not found",
+      status: 404,
+    };
+  }
+  const addressId = user.addressId;
+  return await AddressModel.findOne({
+    _id: addressId,
+    isDeleted: false,
+  });
 }
 
 export async function updateAddressById(payload, id) {

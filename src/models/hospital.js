@@ -2,9 +2,6 @@ import mongoose from "mongoose";
 
 const Hospital = new mongoose.Schema(
   {
-    addressId: {
-      type: mongoose.Types.ObjectId,
-    },
     name: {
       type: String,
     },

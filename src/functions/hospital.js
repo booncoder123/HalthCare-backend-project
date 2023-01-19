@@ -5,10 +5,9 @@ import mongoose from "mongoose";
 const isMongooseId = mongoose.Types.ObjectId.isValid;
 
 export async function createHospital(payload) {
-  const { addressId, name, type } = payload;
+  const { name, type } = payload;
 
   return await HospitalModel.create({
-    addressId,
     name,
     type,
   });

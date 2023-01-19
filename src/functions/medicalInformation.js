@@ -1,4 +1,5 @@
 import MedicalInformationModel from "../models/medicalInformation.js";
+import UserModel from "../models/user.js";
 
 import mongoose from "mongoose";
 
@@ -6,6 +7,7 @@ const isMongooseId = mongoose.Types.ObjectId.isValid;
 
 export async function createMedicalInformation(payload) {
   const {
+    userId,
     allergies,
     phoneNumber,
     congenitalDisease,
@@ -22,7 +24,7 @@ export async function createMedicalInformation(payload) {
     regularMed,
   } = payload;
 
-  return await MedicalInformationModel.create({
+  const medicalInformation = await MedicalInformationModel.create({
     allergies,
     phoneNumber,
     congenitalDisease,
@@ -38,6 +40,23 @@ export async function createMedicalInformation(payload) {
     powerOfAttorneyRelationship,
     regularMed,
   });
+
+  //add medicalId to user model
+  await UserModel.findByIdAndUpdate(
+    {
+      _id: userId,
+      isDeleted: false,
+    },
+    {
+      medicalId: medicalInformation._id,
+    },
+    {
+      new: true,
+      omitUndefined: true,
+    }
+  );
+
+  return medicalInformation;
 }
 
 export async function returnAllMedicalInformation() {

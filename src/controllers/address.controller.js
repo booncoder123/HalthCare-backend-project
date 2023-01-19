@@ -2,6 +2,7 @@ import {
   createAddress,
   returnAllAddress,
   returnAddressById,
+  returnAddressByUserId,
   updateAddressById,
   softDeleteAddressById,
 } from "../functions/address.js";
@@ -30,6 +31,17 @@ export async function getAddressById(req, res, next) {
   try {
     const id = req.params["id"];
     const address = await returnAddressById(id);
+    res.send({ isOk: true, data: address });
+  } catch (error) {
+    console.log("error: ", error);
+    next({ message: error.message, status: error.status });
+  }
+}
+
+export async function getAddressByUserId(req, res, next) {
+  try {
+    const userId = req.params["userid"];
+    const address = await returnAddressByUserId(userId);
     res.send({ isOk: true, data: address });
   } catch (error) {
     console.log("error: ", error);
