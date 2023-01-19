@@ -31,6 +31,12 @@ const EmergencyCase = new mongoose.Schema(
     ageRange: {
       type: String,
     },
+    numOfPatient: {
+      type: String
+    },
+    dateAndTimeConfirmArrival: {
+      type: Date
+    },
     isDeleted: {
       type: Boolean,
       default: false,

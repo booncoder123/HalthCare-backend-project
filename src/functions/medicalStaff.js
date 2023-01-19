@@ -5,12 +5,11 @@ import mongoose from "mongoose";
 const isMongooseId = mongoose.Types.ObjectId.isValid;
 
 export async function createMedicalStaff(payload) {
-  const { hospitalId, firstName, lastName, role } = payload;
+  const { hospitalId, userId, role } = payload;
 
   return await MedicalStaffModel.create({
     hospitalId,
-    firstName,
-    lastName,
+    userId,
     role,
   });
 }
@@ -59,8 +58,7 @@ export async function updateMedicalStaffById(payload, id) {
       },
       {
         hospitalId,
-        firstName,
-        lastName,
+        userId,
         role,
       },
       {

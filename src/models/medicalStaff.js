@@ -5,11 +5,8 @@ const MedicalStaff = new mongoose.Schema(
     hospitalId: {
       type: mongoose.Types.ObjectId,
     },
-    firstName: {
-      type: String,
-    },
-    lastName: {
-      type: String,
+    userId: {
+      type: mongoose.Types.ObjectId,
     },
     role: {
       type: String,

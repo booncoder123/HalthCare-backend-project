@@ -8,7 +8,7 @@ const User = new mongoose.Schema(
     contactId: {
       type: mongoose.Types.ObjectId,
     },
-      medicalId: {
+    medicalId: {
       type: mongoose.Types.ObjectId,
     },
     role: {
