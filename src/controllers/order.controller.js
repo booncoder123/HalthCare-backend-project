@@ -51,7 +51,7 @@ export async function putOrderById(req, res, next) {
 export async function putStatusById(req, res, next) {
   try {
     const id = req.params["id"];
-    const order = await updateStatusById(req.body, id);
+    const order = await updateStatusById(id);
     res.send({ isOk: true, data: order });
   } catch (error) {
     console.log("error: ", error);

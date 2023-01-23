@@ -8,10 +8,17 @@ const isMongooseId = mongoose.Types.ObjectId.isValid;
 export async function createOrder(payload) {
   const { userId, products, status } = payload;
 
+  const productId = products[0].id;
+  const product = await ProductModel.findOne({
+    _id: productId,
+  });
+  const pharmacyId = product.pharmacyId;
+
   return await OrderModel.create({
     userId,
     products,
     status,
+    pharmacyId,
   });
 }
 
@@ -23,10 +30,12 @@ export async function returnAllOrder() {
 
 export async function returnOrderById(id) {
   if (isMongooseId(id)) {
-    return await OrderModel.findOne({
+    const order = await OrderModel.findOne({
       _id: id,
       isDeleted: false,
     });
+
+    return order;
   } else {
     throw {
       message: "invalid id",
@@ -61,8 +70,7 @@ export async function updateOrderById(payload, id) {
   }
 }
 
-export async function updateStatusById(payload, id) {
-  const { products } = payload;
+export async function updateStatusById(id) {
   if (isMongooseId(id)) {
     const order = await OrderModel.findByIdAndUpdate(
       {
@@ -78,35 +86,36 @@ export async function updateStatusById(payload, id) {
       }
     );
 
+    const products = order.products;
+
     //remove the amount of products from pharmacy
-      products.forEach(async function (productOrder) {
-        //product in storage
-        const product = await ProductModel.findOne({
-          _id: productOrder.id,
-          isDeleted: false,
-        });
-
-        const newAmount =
-          parseInt(product.amount) - parseInt(productOrder.amount);
-
-        //update new number of product in storage
-        await ProductModel.findOneAndUpdate(
-          {
-            _id: product.id,
-            isDeleted: false,
-          },
-          {
-            amount: newAmount,
-          },
-          {
-            new: true,
-            omitUndefined: true,
-          }
-        );
+    products.forEach(async function (productOrder) {
+      //product in storage
+      const product = await ProductModel.findOne({
+        _id: productOrder.id,
+        isDeleted: false,
       });
-      
-      return order;
-      
+
+      const newAmount =
+        parseInt(product.amount) - parseInt(productOrder.amount);
+
+      //update new number of product in storage
+      await ProductModel.findOneAndUpdate(
+        {
+          _id: product.id,
+          isDeleted: false,
+        },
+        {
+          amount: newAmount,
+        },
+        {
+          new: true,
+          omitUndefined: true,
+        }
+      );
+    });
+
+    return order;
   } else {
     throw {
       message: "invalid id",
