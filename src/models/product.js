@@ -1,17 +1,19 @@
 import mongoose from "mongoose";
 
-const Pharmacy = new mongoose.Schema(
+const Product = new mongoose.Schema(
   {
-    addressId: {
-      type: mongoose.Types.ObjectId
-    },
-
+    pharmacyId: {
+        type: mongoose.Types.ObjectId
+      },
     name: {
       type: String,
     },
-    description: {
+    amount: {
       type: String,
     },
+    price: {
+        type: String,
+      },
     isDeleted: {
       type: Boolean,
       default: false,
@@ -24,4 +26,4 @@ const Pharmacy = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("pharmacy", Pharmacy);
+export default mongoose.model("product", Product);

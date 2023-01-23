@@ -1,5 +1,5 @@
 import PharmacyModel from "../models/pharmacy.js";
-
+import ProductModel from "../models/product.js";
 import mongoose from "mongoose";
 
 const isMongooseId = mongoose.Types.ObjectId.isValid;
@@ -31,6 +31,20 @@ export async function returnPharmacyById(id) {
       status: 404,
     };
   }
+}
+
+export async function returnAllProductsById(id){
+    if (isMongooseId(id)) {
+        return await ProductModel.find({
+          pharmacyId: id,
+          isDeleted: false,
+        });
+      } else {
+        throw {
+          message: "invalid id",
+          status: 404,
+        };
+      }
 }
 
 export async function updatePharmacyById(payload, id) {

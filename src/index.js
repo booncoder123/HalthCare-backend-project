@@ -12,6 +12,7 @@ import medicalInformationRouter from "./routes/medicalInformation.routes.js";
 import medicalStaffRouter from "./routes/medicalStaff.routes.js";
 import pharmacistRouter from "./routes/pharmacist.routes.js";
 import pharmacyRouter from "./routes/pharmacy.routes.js";
+import productRouter from "./routes/product.routes.js";
 import userRouter from "./routes/user.routes.js";
 import ErrorHandler from "./middlewares/ErrorHandler.js";
 
@@ -51,6 +52,7 @@ async function startServer() {
   app.use(medicalStaffRouter);
   app.use(pharmacistRouter);
   app.use(pharmacyRouter);
+  app.use(productRouter);
   app.use(userRouter);
   app.use(ErrorHandler);
   app.use("/", (req, res, next) => {
