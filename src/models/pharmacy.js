@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Hospital = new mongoose.Schema(
+const Pharmacy = new mongoose.Schema(
   {
     addressId: {
       type: mongoose.Types.ObjectId
@@ -8,7 +8,7 @@ const Hospital = new mongoose.Schema(
     name: {
       type: String,
     },
-    type: {
+    description: {
       type: String,
     },
     isDeleted: {
@@ -22,4 +22,5 @@ const Hospital = new mongoose.Schema(
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
   }
 );
-export default mongoose.model("hospital", Hospital);
+
+export default mongoose.model("pharmacy", Pharmacy);

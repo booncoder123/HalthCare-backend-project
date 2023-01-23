@@ -1,6 +1,7 @@
 import AddressModel from "../models/address.js";
 import UserModel from "../models/user.js";
 import HospitalModel from "../models/hospital.js";
+import PharmacyModel from "../models/pharmacy.js";
 
 import mongoose from "mongoose";
 
@@ -35,8 +36,9 @@ export async function createAddress(payload) {
     longitude,
     type,
   });
-
+  
   if (isMongooseId(userId)) {
+    console.log("HEHE")
     await UserModel.findOneAndUpdate(
       {
         _id: userId,
@@ -57,6 +59,23 @@ export async function createAddress(payload) {
       },
       { new: true, omitUndefined: true }
     );
+  } else if (isMongooseId(pharmacyId)) {
+    await PharmacyModel.findOneAndUpdate(
+      {
+        _id: pharmacyId,
+        isDeleted: false,
+      },
+      {
+        addressId: address._id,
+      },
+      { new: true, omitUndefined: true }
+    );
+  } else {
+    throw {
+      message:
+        "please specify id(hospital, user, pharmacy) in which the address belongs to",
+      status: 404,
+    };
   }
 
   return address;

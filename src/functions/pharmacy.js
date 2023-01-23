@@ -1,28 +1,27 @@
-import PharmacistModel from "../models/pharmacist.js";
+import PharmacyModel from "../models/pharmacy.js";
 
 import mongoose from "mongoose";
 
 const isMongooseId = mongoose.Types.ObjectId.isValid;
 
-export async function createPharmacist(payload) {
-  const { userId, imgId, verificationStatus } = payload;
+export async function createPharmacy(payload) {
+  const { name, description } = payload;
 
-  return await PharmacistModel.create({
-    userId,
-    imgId,
-    verificationStatus,
+  return await PharmacyModel.create({
+    name,
+    description,
   });
 }
 
-export async function returnAllPharmacist() {
-  return await PharmacistModel.find({
+export async function returnAllPharmacy() {
+  return await PharmacyModel.find({
     isDeleted: false,
   });
 }
 
-export async function returnPharmacistById(id) {
+export async function returnPharmacyById(id) {
   if (isMongooseId(id)) {
-    return await PharmacistModel.findOne({
+    return await PharmacyModel.findOne({
       _id: id,
       isDeleted: false,
     });
@@ -34,18 +33,17 @@ export async function returnPharmacistById(id) {
   }
 }
 
-export async function updatePharmacistById(payload, id) {
-  const { userId, imgId, verificationStatus } = payload;
+export async function updatePharmacyById(payload, id) {
+  const { name, description } = payload;
   if (isMongooseId(id)) {
-    return await PharmacistModel.findOneAndUpdate(
+    return await PharmacyModel.findOneAndUpdate(
       {
         _id: id,
         isDeleted: false,
       },
       {
-        userId,
-        imgId,
-        verificationStatus,
+        name,
+        description,
       },
       {
         new: true,
@@ -60,9 +58,9 @@ export async function updatePharmacistById(payload, id) {
   }
 }
 
-export async function softDeletePharmacistById(id) {
+export async function softDeletePharmacyById(id) {
   if (isMongooseId(id)) {
-    return await PharmacistModel.findOneAndUpdate(
+    return await PharmacyModel.findOneAndUpdate(
       {
         _id: id,
         isDeleted: false,

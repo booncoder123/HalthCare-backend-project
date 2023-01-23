@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const User = new mongoose.Schema(
   {
     addressId: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Types.ObjectId
     },
     contactId: {
       type: mongoose.Types.ObjectId,
