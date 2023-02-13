@@ -106,6 +106,53 @@ export async function returnUserById(id) {
   }
 }
 
+export async function updateUserById(payload, id) {
+  const {
+    addressId,
+    contactId,
+    medicalId,
+    role,
+    email,
+    faceImg,
+    nationalIdImg,
+    verificationStatus,
+    emailVerify,
+    uid,
+    providerId,
+  } = payload;
+  if (isMongooseId(id)) {
+    return await UserModel.findOneAndUpdate(
+      {
+        _id: id,
+        isDeleted: false,
+      },
+
+      {
+        addressId,
+        contactId,
+        medicalId,
+        role,
+        email,
+        faceImg,
+        nationalIdImg,
+        verificationStatus,
+        emailVerify,
+        uid,
+        providerId,
+      },
+      {
+        new: true,
+        omitUndefined: true,
+      }
+    );
+  } else {
+    throw {
+      message: "invalid id",
+      status: 404,
+    };
+  }
+}
+
 export async function softDeleteUserById(id) {
   if (isMongooseId(id)) {
     return await UserModel.findOneAndUpdate(
