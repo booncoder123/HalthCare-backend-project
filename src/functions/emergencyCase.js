@@ -16,7 +16,9 @@ export async function createEmergencyCase(payload) {
     gender,
     ageRange,
     numOfPatient,
-    dateAndTimeConfirmArrival
+    dateAndTimeConfirmArrival,
+    latitude,
+    longitude,
   } = payload;
 
   if (isMongooseId(userId)) {
@@ -31,7 +33,9 @@ export async function createEmergencyCase(payload) {
       gender,
       ageRange,
       numOfPatient,
-      dateAndTimeConfirmArrival
+      dateAndTimeConfirmArrival,
+      latitude,
+      longitude,
     });
   } else {
     throw {
@@ -87,7 +91,9 @@ export async function updateEmergencyCaseById(payload, id) {
     gender,
     ageRange,
     numOfPatient,
-    dateAndTimeConfirmArrival
+    dateAndTimeConfirmArrival,
+    latitude,
+    longitude,
   } = payload;
 
   if (isMongooseId(id)) {
@@ -107,7 +113,9 @@ export async function updateEmergencyCaseById(payload, id) {
         gender,
         ageRange,
         numOfPatient,
-        dateAndTimeConfirmArrival
+        dateAndTimeConfirmArrival,
+        latitude,
+        longitude,
       },
       { new: true, omitUndefined: true }
     );

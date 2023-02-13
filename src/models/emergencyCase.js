@@ -37,6 +37,12 @@ const EmergencyCase = new mongoose.Schema(
     dateAndTimeConfirmArrival: {
       type: Date
     },
+    latitude: {
+      type: String,
+    },
+    longitude: {
+      type: String,
+    },
     isDeleted: {
       type: Boolean,
       default: false,
