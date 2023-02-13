@@ -22,7 +22,10 @@ const EmergencyCase = new mongoose.Schema(
     urgencyLevel: {
       type: String,
     },
-    emergencyStatus: {
+    acceptaceStatus: {
+      type: String,
+    },
+    deliveringStatus: {
       type: String,
     },
     gender: {
@@ -43,6 +46,13 @@ const EmergencyCase = new mongoose.Schema(
     longitude: {
       type: String,
     },
+    assigneeName: {
+      type: String
+    },
+    assigneeNumber: {
+      type: String
+    },
+    
     isDeleted: {
       type: Boolean,
       default: false,
