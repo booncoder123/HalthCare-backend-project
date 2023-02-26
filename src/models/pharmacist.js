@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 
-const MedicalStaff = new mongoose.Schema(
+const Pharmacist = new mongoose.Schema(
   {
-    hospitalId: {
-      type: mongoose.Types.ObjectId,
-    },
     userId: {
       type: mongoose.Types.ObjectId,
     },
-    role: {
+    imgId: {
       type: String,
     },
+    verificationStatus: {
+        type: String,
+      },
     isDeleted: {
       type: Boolean,
       default: false,
@@ -23,4 +23,4 @@ const MedicalStaff = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("medical staff", MedicalStaff);
+export default mongoose.model("pharmacist", Pharmacist);

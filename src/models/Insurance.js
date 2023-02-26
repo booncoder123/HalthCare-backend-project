@@ -1,18 +1,29 @@
 import mongoose from "mongoose";
-import { required } from "nodemon/lib/config";
 
-const Insurance = new mongoose.Schema({
-  userId: {
-    type: mongoose.Types.ObjectId,
-    required: true,
+const Insurance = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Types.ObjectId,
+    },
+    number: {
+      type: String,
+    },
+    type: {
+      type: String,
+    },
+    company: {
+      type: String,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
-  insuranceNumber: {
-    type: String,
-  },
-  insuranceType: {
-    type: String,
-  },
-  insuranceCompany: {
-    type: String,
-  },
-});
+  {
+    strict: false,
+    versionKey: false,
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+  }
+);
+
+export default mongoose.model("insurance", Insurance);

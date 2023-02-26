@@ -1,5 +1,14 @@
 import express from "express";
 import multer from "multer";
+
+import {
+  deleteUserById,
+  getAllUser,
+  getUserById,
+  postUser,
+  putUserById,
+} from "../controllers/user.controller.js";
+
 // import authMiddleware from "../../middlewares/Auth.middleware";
 // import userService from "../../services/user.service";
 
@@ -17,6 +26,15 @@ import multer from "multer";
 // };
 
 const router = express.Router();
+
+router.post("/user", postUser);
+
+router.get("/users", getAllUser);
+router.get("/user/:id", getUserById);
+
+router.put("/user/:id", putUserById);
+
+router.delete("/user/:id", deleteUserById);
 
 // router.get("/user-detail", authMiddleware, userService.getDetail);
 

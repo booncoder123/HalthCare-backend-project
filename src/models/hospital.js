@@ -1,17 +1,25 @@
 import mongoose from "mongoose";
-import { required } from "nodemon/lib/config";
 
-const Hospital = new mongoose.Schema({
-  addressId: {
-    type: mongoose.Types.ObjectId,
-    required: true,
+const Hospital = new mongoose.Schema(
+  {
+    addressId: {
+      type: mongoose.Types.ObjectId
+    },
+    name: {
+      type: String,
+    },
+    type: {
+      type: String,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
-  hospitalName: {
-    type: String,
-    required: "true",
-  },
-  hospitalType: {
-    type: String,
-    required: "true",
-  },
-});
+  {
+    strict: false,
+    versionKey: false,
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
+  }
+);
+export default mongoose.model("hospital", Hospital);
