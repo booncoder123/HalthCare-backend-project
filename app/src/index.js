@@ -7,7 +7,7 @@ async function startServer() {
   const forms = multer();
   const app = express();
 
-  await connectMongo();
+    await connectMongo();
   //   await connectPostgres();
 
   //   app.use((req, res, next) => {
@@ -28,6 +28,10 @@ async function startServer() {
     next();
   });
 
+
+app.use("/test",(req, res, next)=>{
+  res.status(200).send("It's okay");
+})
   //   app.use("/v1", apiv1Routes);
 
   app.use("/", (req, res, next) => {
