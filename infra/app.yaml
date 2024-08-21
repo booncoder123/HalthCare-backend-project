@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appserver-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: appserver
+  template:
+    metadata:
+      labels:
+        app: appserver
+    spec:
+      containers:
+        - name: appserver
+          image: peedparkam/appserver:v2
+          resources:
+            requests:
+              memory: "50Mi"
+              cpu: "500m"
+            limits:
+              memory: "500Mi"
+              cpu: "2000m"
+
+      
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: appserver-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: appserver
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+
