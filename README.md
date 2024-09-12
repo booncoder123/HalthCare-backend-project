@@ -42,4 +42,4 @@ Once the server is running, access the API endpoints using an API client like Po
 
 ## Additional Information
 
-For the full version of the code, additional features, and complete project deployment, please visit the project on GitLab: [HealthCare Backend on GitLab](#).
+For the full version of the code, additional features, and complete project deployment, please visit the project on GitLab: [https://gitlab.com/booncoder123/HalthCare-backend-project](#).
